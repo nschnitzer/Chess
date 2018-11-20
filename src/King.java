@@ -17,9 +17,30 @@ public class King extends Piece
 	}
 
 	//Moves the piece
-	public void move(int x1, int y1, int x2, int y2, Piece[][] board, ArrayList<Piece> eliminated)
+	public void move(int x1, int y1, int x2, int y2, Piece[][] board, ArrayList<Piece> eliminated) throws InvalidMoveException, CheckmateException
 	{
-		
+		if (board [x1][y1].isTeamOne() == board[x2][y2].isTeamOne())
+		{
+			throw new InvalidMoveException();
+		}
+		else if (Math.abs(x1-x2) <= 1 && Math.abs(y1- y2) <= 1)
+		{
+				if (board[x2][y2] == null)
+				{
+					board[x2][y2] = board[x1][y1];
+					board[x1][y1] = null;
+				}
+				else if (board[x1][y1].isTeamOne() && board[x2][y2].isTeamOne() == false)
+				{
+					eliminated.add(board[x2][y2]);
+				}
+		}
+			else
+			{
+				throw new InvalidMoveException();
+			}
+		}
+			
 
 	}
 	
