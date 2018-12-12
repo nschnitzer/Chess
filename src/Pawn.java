@@ -41,6 +41,7 @@ public class Pawn extends Piece
 	{
 		if (firstMove == true)
 		{
+			System.out.println("Test2");
 			if (c1 != c2)
 			{
 				throw new InvalidMoveException();
@@ -59,17 +60,21 @@ public class Pawn extends Piece
 		{
 			throw new InvalidMoveException();
 		}
+
 		else if (c1 == c2 && board[r2][c2] == null)//moving forward one space
 		{
+			
 			if (board[r1][c1].isTeamOne() && r1 - r2 == -1) //if moves down 1
 			{
-				board[r2][c2] = board[r1][r2];
-				board[r1][r2] = null;
+				board[r2][c2] = board[r1][c1]; // 11.28.18 - switch c1 from r2
+				board[r1][c1] = null; // switched c1 from r2
 			}
+			
 			else if (board[r1][c1].isTeamOne() == false && r1 - r2 == 1)//if moves up 1
 			{
-				board[r2][c2] = board[r1][r2];
-				board[r1][r2] = null;
+				System.out.println("test");
+				board[r2][c2] = board[r1][c1];// 11.28.18 - switch c1 from r2
+				board[r1][c1] = null; // switched c1 from r2	`
 			}
 			else
 			{
@@ -81,14 +86,20 @@ public class Pawn extends Piece
 		{
 			if (board[r2][c2]!= null)
 			{
-				if(r1-r2 == -1 && board[r2][c2].isTeamOne())//captures team 2 piece
+				if(r1-r2 == -1 && board[r2][c2].isTeamOne() == false)//captures team 2 piece
 				{
+					System.out.println("Enters capture team 2");
+					board[r2][c2] = board[r1][c1];
+					board[r1][c1] = null;
 					p2Eliminated.add(board[r2][c2]);
 				}
 				else
 				{
+
 					if (r1-r2 == 1 && board[r2][c2].isTeamOne())//captures team 1 piece
 					{
+						board[r2][c2] = board[r1][c1];
+						board[r1][c1] = null;
 						p1Eliminated.add(board[r2][c2]);
 					}
 					else
@@ -124,6 +135,11 @@ public class Pawn extends Piece
 	public String getName()
 	{
 		return "Pawn";
+	}
+	
+	public boolean isPawn()
+	{
+		return true;
 	}
 
 }

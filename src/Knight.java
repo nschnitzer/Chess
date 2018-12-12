@@ -30,13 +30,13 @@ public class Knight extends Piece
 			}
 			else //must be enemy piece
 			{
-				if (board[r1][c2].isTeamOne() && board[r2][c2].isTeamOne() == false)//if team 1 captures team 2
+				if (board[r1][c1].isTeamOne() && board[r2][c2].isTeamOne() == false)//if team 1 captures team 2
 				{
-					p2Eliminated.add(board[r2][c2]);
+					eliminated.add(board[r2][c2]);
 				}
 				else if (board[r1][c1].isTeamOne() == false && board[r2][c2].isTeamOne())//if team 2 captures team 1
 				{
-					p1Eliminated.add(board[r2][c2]);
+					eliminated.add(board[r2][c2]);
 				}
 				else
 				{

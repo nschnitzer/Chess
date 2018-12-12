@@ -95,11 +95,6 @@ public class Board
 	public void printBoard()
 	{
 		//Top Legend
-		System.out.print("\t");
-		for (int i = 0; i <= SIZE; i++) //Top legend
-		{
-			System.out.print(i + "\t");
-		}
 
 
 		System.out.println();
@@ -117,6 +112,16 @@ public class Board
 			}
 			System.out.println();
 		}
+
+		System.out.print("\tA" + "\t");
+		System.out.print("B" + "\t");
+		System.out.print("C" + "\t");
+		System.out.print("D" + "\t");
+		System.out.print("E" + "\t");
+		System.out.print("F" + "\t");
+		System.out.print("G" + "\t");
+		System.out.print("H" + "\t");
+		System.out.println();
 	}
 
 	//Finds piece
@@ -132,47 +137,49 @@ public class Board
 	//Calls move method of associated piece
 	//Check if starting loc piece exists
 	//Wrong Team Exception and Out of Bounds check
-	public void prepMove(int x1, int y1, int x2, int y2) throws WrongTeamException, InvalidMoveException, CheckmateException
+	public void prepMove(int x1, int y1, int x2, int y2, boolean isTeamOne) throws WrongTeamException, InvalidMoveException, CheckmateException
 	{
 		Piece p1, p2;
 		try
 		{
+
 			p1 = findPiece(x1,y1);
 			p2 = findPiece(x2,y2);
+			//System.out.println(p1);
+
 		}
 		catch(InvalidMoveException e)
 		{
 			throw new InvalidMoveException(e.getMessage());
 		}
 
+		//System.out.println(p1);
+
 		if (p1 == null)
 		{
+
 			throw new InvalidMoveException("Starting Piece is null");
 		}
 
 		//Note: Check pieces in between in specific piece class
-		if (p1.isTeamOne() == p2.isTeamOne())
+		if (p2 != null && p1.isTeamOne() == p2.isTeamOne())
 		{
 			throw new WrongTeamException("Same Team");
 		}
 
 		//Passed Initial Exception Checking
-		if (p1.isTeamOne())
+		System.out.println("prepmove");
+
+
+		System.out.println("Test");
+		if (p1.isPawn())
 		{
-			try
-			{
-				p1.move(x1, y1, x2, y2, board, p2Eliminated);
-			}
-			catch (CheckmateException e) //Winner
-			{
-				throw new CheckmateException(); //Handle in driver
-			}
-			catch (InvalidMoveException e) //Handle in driver
-			{
-				throw new InvalidMoveException(e.getMessage());
-			}
-			
+			((Pawn)p1).move(x1, y1, x2, y2, board, p1Eliminated, p2Eliminated);
 		}
+
+		p1.move(x1, y1, x2, y2, board, p2Eliminated);
+
+
 	}
 
 }

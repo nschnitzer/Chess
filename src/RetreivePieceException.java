@@ -2,7 +2,7 @@
 // Nathan & Ryan
 // RetreivePieceException.java
 // 10/18/18
-// Throwsa when a pawn reaches the opposite side
+// Throws when a pawn reaches the opposite side
 //*********************************************
 
 public class RetreivePieceException extends Exception
