@@ -1,5 +1,5 @@
 //****************************************
-// Nathan & Ryan
+// Nathan & Ryan (and Ishma!!)
 // King.java
 // 10/11/18
 // Represents a King piece
@@ -19,11 +19,15 @@ public class King extends Piece
 	//Moves the piece
 	public void move(int x1, int y1, int x2, int y2, Piece[][] board, ArrayList<Piece> eliminated) throws InvalidMoveException, CheckmateException
 	{
-		if (board [x1][y1].isTeamOne() == board[x2][y2].isTeamOne())
+		if (board [x2][y2] != null)
 		{
-			throw new InvalidMoveException();
+			if (board [x1][y1].isTeamOne() == board[x2][y2].isTeamOne())
+			{
+				throw new InvalidMoveException();
+			}
 		}
-		else if (Math.abs(x1-x2) <= 1 && Math.abs(y1- y2) <= 1)
+		
+		else if (Math.abs(x1-x2) <= 1 && Math.abs(y1-y2) <= 1)
 		{
 		
 			if (board[x2][y2] == null)

@@ -1,5 +1,5 @@
 //****************************************
-// Nathan & Ryan
+// Nathan & Ryan (and Ishma!!)
 // Pawn.java
 // 10/11/18
 // Represents a pawn piece
