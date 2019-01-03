@@ -1,5 +1,5 @@
 //***********************************************************
-// Nathan Schnitzer
+// Nathan Schnitzer (and Ishma!!)
 // Board.java
 // 10/11/18
 // Represents the chess board
@@ -74,7 +74,7 @@ public class Board
 					board[i][k] = new Bishop(true); //Top Left
 					board[SIZE][k] = new Bishop(false); //Bottom Left
 					board[i][SIZE-k] = new Bishop(true); //Top Right
-					board[SIZE][SIZE-k] = new Bishop(true); //Bottom Right
+					board[SIZE][SIZE-k] = new Bishop(false); //Bottom Right
 					continue;
 				}
 
@@ -100,7 +100,7 @@ public class Board
 		System.out.println();
 		for (int i = 0; i <= SIZE; i++)
 		{
-			System.out.print(i + "\t");
+			System.out.print(i+1 + "\t");
 			for (int k = 0; k <= SIZE; k++)
 			{
 				if (board[i][k] == null)
@@ -142,7 +142,6 @@ public class Board
 		Piece p1, p2;
 		try
 		{
-
 			p1 = findPiece(x1,y1);
 			p2 = findPiece(x2,y2);
 			//System.out.println(p1);
@@ -154,7 +153,6 @@ public class Board
 		}
 
 		//System.out.println(p1);
-
 		if (p1 == null)
 		{
 
@@ -164,20 +162,26 @@ public class Board
 		//Note: Check pieces in between in specific piece class
 		if (p2 != null && p1.isTeamOne() == p2.isTeamOne())
 		{
-			throw new WrongTeamException("Same Team");
+			throw new WrongTeamException();
+		}
+
+		else if (isTeamOne == true && p1.isTeamOne() == false)
+		{
+
+			throw new WrongTeamException();
+		}
+		else if (isTeamOne == false && p1.isTeamOne() == true)
+		{
+			throw new WrongTeamException();
 		}
 
 		//Passed Initial Exception Checking
-		System.out.println("prepmove");
-
-
-		System.out.println("Test");
 		if (p1.isPawn())
 		{
 			((Pawn)p1).move(x1, y1, x2, y2, board, p1Eliminated, p2Eliminated);
 		}
-
-		p1.move(x1, y1, x2, y2, board, p2Eliminated);
+		else
+			p1.move(x1, y1, x2, y2, board, p2Eliminated);
 
 
 	}

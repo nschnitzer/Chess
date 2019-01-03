@@ -1,6 +1,6 @@
 //****************************************
-// Nathan & Ryan
-// Queen.java
+// Nathan & Ryan (and Ishma!!)
+// Queen.java 
 // 10/11/18
 // Represents a Queen piece
 //****************************************
@@ -31,8 +31,23 @@ public class Queen extends Piece
 		//Handle Diagonal movement
 		//Literally same code as Bishop
 		//Checks for diagonal movement
-		if (Math.abs(r1-r2) != Math.abs(c1-c2))
+
+		if (board[r2][c2] != null)
 		{
+			//Check that the piece is moving diagonally
+			//Ensure it moves diagonally
+			if (Math.abs(r1-r2) != Math.abs(c1-c2))
+			{
+				throw new InvalidMoveException("Must Move Diagonally");
+			}
+			if (board[r1][c1].isTeamOne() == board[r2][c2].isTeamOne())
+			{
+				throw new InvalidMoveException();
+			}
+		}
+		
+		//if (Math.abs(r1-r2) != Math.abs(c1-c2))
+		//{
 			//Check for pieces in between
 			//Check for when it moves up and right
 			if (r1 - r2 > 0 && c1 - c2 < 0)
@@ -54,7 +69,7 @@ public class Queen extends Piece
 
 				//Passed all exception catching
 				//Check if king
-				if (board[r2][c2].isKing())
+				if (board[r2][c2] != null && board[r2][c2].isKing())
 				{
 					throw new CheckmateException();
 				}
@@ -81,7 +96,7 @@ public class Queen extends Piece
 				}
 
 				//Passed all exception catching
-				if (board[r2][c2].isKing())
+				if (board[r2][c2] != null && board[r2][c2].isKing())
 				{
 					throw new CheckmateException();
 				}
@@ -146,7 +161,7 @@ public class Queen extends Piece
 				board[r1][c1] = null;
 				return;
 			}
-		}
+		//}
 
 		//Handles Horizontal Movement
 		if (r1-r2 == 0 && c1-c2 != 0)
@@ -169,7 +184,7 @@ public class Queen extends Piece
 					x++;
 				}
 			}
-			
+
 			//If moving right
 			if (c1 - c2 > 0)
 			{
@@ -198,7 +213,7 @@ public class Queen extends Piece
 			board[r2][c2] = board[r1][c1];
 			board[r1][c1] = null;
 		}
-		
+
 		//Handles Vertical Movement
 		if (r1-r2 != 0 && c1-c2 == 0)
 		{
@@ -220,7 +235,7 @@ public class Queen extends Piece
 					x++;
 				}
 			}
-			
+
 			//If moving down
 			if (r1 - r2 < 0)
 			{
@@ -238,19 +253,23 @@ public class Queen extends Piece
 					}
 				}
 			}
-			
+
 			//Passed exception checking
 			//Check if capturing king
-			if (board[r2][c2].isKing())
+			if (board[r2][c2] != null)
 			{
-				throw new CheckmateException();
+				if (board[r2][c2].isKing())
+				{
+					throw new CheckmateException();
+				}
 			}
+			
 			eliminated.add(board[r2][c2]);
 			board[r2][c2] = board[r1][c1];
 			board[r1][c1] = null;
 		}
 	}
-	
+
 	public String toString()
 	{
 		if (super.isTeam1 == true)

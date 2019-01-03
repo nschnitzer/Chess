@@ -17,10 +17,15 @@ public class Knight extends Piece
 
 	public void move(int r1, int c1, int r2, int c2, Piece[][] board, ArrayList<Piece> eliminated) throws InvalidMoveException, CheckmateException
 	{
-		if (board[r1][c1].isTeamOne() == board[r2][c2].isTeamOne())//if the new piece location is the same team as the current piece
+		if (board[r2][c2] != null)
 		{
-			throw new InvalidMoveException();
+			if (board[r1][c1].isTeamOne() == board[r2][c2].isTeamOne())//if the new piece location is the same team as the current piece
+			{
+				throw new InvalidMoveException();
+			}
+
 		}
+		
 		else if ((Math.abs(c1-c2) == 2 && Math.abs(r1-r2) == 1) || (Math.abs(c1-c2) == 1 && Math.abs(r1-r2) == 2))
 		{
 			if (board[r2][c2] == null)
@@ -51,14 +56,15 @@ public class Knight extends Piece
 		{
 			throw new InvalidMoveException();
 		}
+		
 	}
-	
+
 	public String getName()
 	{
 		return "Knight";
 	}
-	
-	
+
+
 	public String toString()
 	{
 		if (super.isTeam1 == true)

@@ -1,5 +1,5 @@
 //****************************************
-// Nathan & Ryan
+// Nathan & Ryan (and Ishma!!)
 // Bishop.java
 // 10/11/18
 // Represents a Bishop piece
@@ -36,14 +36,21 @@ public class Bishop extends Piece
 	 * @author 120nschnitzer
 	 * @author 120rgiovanniello
 	 */
+
 	public void move(int r1, int c1, int r2, int c2, Piece[][] board, ArrayList<Piece> eliminated) throws InvalidMoveException, CheckmateException
 	{
-
-		//Check that the piece is moving diagonally
-		//Ensure it moves diagonally
-		if (Math.abs(r1-r2) != Math.abs(c1-c2))
+		if (board[r2][c2] != null)
 		{
-			throw new InvalidMoveException("Must Move Diagonally");
+			//Check that the piece is moving diagonally
+			//Ensure it moves diagonally
+			if (Math.abs(r1-r2) != Math.abs(c1-c2))
+			{
+				throw new InvalidMoveException("Must Move Diagonally");
+			}
+			if (board[r1][c1].isTeamOne() == board[r2][c2].isTeamOne())
+			{
+				throw new InvalidMoveException();
+			}
 		}
 
 		//Check for pieces in between
@@ -53,21 +60,28 @@ public class Bishop extends Piece
 			int x = 1;
 			while (r1 + x - r2 > 0)
 			{
-				if (board[r1-x][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
+
+				if (r1 + x < 8 && c1 + x < 8)
 				{
-					throw new InvalidMoveException("Piece in the way");
-				}
-				if (board[r1-x][c1+x] != null)
-				{
-					throw new InvalidMoveException("Piece in the way");
-				}
+					if (board[r1+x][c1+x] != null)
+					{
+						throw new InvalidMoveException("Piece in the way");
+					}
+					if (board[r1+x][c1+x] != null)
+					{
+						if (board[r1+x][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
+						{
+							throw new InvalidMoveException("Piece in the way");
+						}
+					}
+									}
 				x++;
 			}
 
 
 			//Passed all exception catching
 			//Check if king
-			if (board[r2][c2].isKing())
+			if (board[r2][c2] != null && board[r2][c2].isKing())
 			{
 				throw new CheckmateException();
 			}
@@ -94,7 +108,7 @@ public class Bishop extends Piece
 			}
 
 			//Passed all exception catching
-			if (board[r2][c2].isKing())
+			if (board[r2][c2] != null && board[r2][c2].isKing())
 			{
 				throw new CheckmateException();
 			}
@@ -103,26 +117,32 @@ public class Bishop extends Piece
 			board[r1][c1] = null;
 			return;
 		}
-		
+
 		//Check for when it moves down and left
 		if (r1-r2 < 0 && c1 - c2 > 0)
 		{
 			int x = 1;
 			while (r1-x-r2 < 0)
 			{
-				if (board[r1+x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
+
+				if (r1 - x >= 0)
 				{
-					throw new InvalidMoveException("Piece in the way");
+					if (board[r1-x][c1-x] != null)
+					{
+						throw new InvalidMoveException("Piece in the way");
+					}
+
+					if (board[r1-x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
+					{
+						throw new InvalidMoveException("Piece in the way");
+					}
 				}
-				if (board[r1+x][c1-x] != null)
-				{
-					throw new InvalidMoveException("Piece in the way");
-				}
+
 				x++;
 			}
-			
+
 			//Passed all invalid move exception catching
-			if (board[r2][c2].isKing())
+			if (board[r2][c2] != null && board[r2][c2].isKing())
 			{
 				throw new CheckmateException();
 			}
@@ -131,26 +151,25 @@ public class Bishop extends Piece
 			board[r1][c1] = null;
 			return;
 		}
-		
+
 		//Check for when it moves down and right
 		if (r1-r2 < 0 && c1-c2 < 0)
 		{
 			int x = 1;
 			while (r1+x-r2 > 0)
 			{
-				if (board[r1+x][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
+				if (board[r1+x][c1+x] != null)
 				{
 					throw new InvalidMoveException("Piece in the way");
 				}
-				if (board[r1+x][c1+x] != null)
+				if (board[r1+x][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
 				{
 					throw new InvalidMoveException("Piece in the way");
 				}
 				x++;
 			}
-			
 			//Passed all invalid move exception catching
-			if (board[r2][c2].isKing())
+			if (board[r2][c2] != null && board[r2][c2].isKing())
 			{
 				throw new CheckmateException();
 			}
@@ -170,7 +189,7 @@ public class Bishop extends Piece
 		else
 			return "2B";
 	}
-	
+
 	//Returns the name of the piece
 	public String getName()
 	{
