@@ -40,14 +40,12 @@ public class Driver {
 			while (lcv)
 			{
 
-				System.out.println("TESTEER");
-				tokenizer = new StringTokenizer(scan.nextLine());
 				lcv = false;
 				//Scanner scan = new Scanner(new File("src/inputs.txt"));
 
 				//Asking for input
 
-				if (counter % 2 == 0)
+				if (counter % 2 == 1)
 				{
 					System.out.println(" -------=== It is currently Team 1's Turn! ===------- ");
 					System.out.println("Enter the coordinates to the piece you would like to move and the coordinates you would like to move them to: (Format: row1 column1 row2 column2 ");
@@ -60,6 +58,7 @@ public class Driver {
 					System.out.println("Enter the coordinates to the piece you would like to move and the coordinates you would like to move them to: (Format: row1 column1 row2 column2 ");
 					counter++;
 				}
+				tokenizer = new StringTokenizer(scan.nextLine());
 				
 				//Exceptions
 				try 
@@ -138,7 +137,7 @@ public class Driver {
 						p4 = 7;
 					}
 
-					if (counter % 2 == 0)
+					if (counter % 2 == 1)
 					{
 						board.prepMove(p1-1, p2, p3-1, p4, false);
 

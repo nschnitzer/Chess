@@ -74,7 +74,7 @@ public class Board
 					board[i][k] = new Bishop(true); //Top Left
 					board[SIZE][k] = new Bishop(false); //Bottom Left
 					board[i][SIZE-k] = new Bishop(true); //Top Right
-					board[SIZE][SIZE-k] = new Bishop(true); //Bottom Right
+					board[SIZE][SIZE-k] = new Bishop(false); //Bottom Right
 					continue;
 				}
 

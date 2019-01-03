@@ -60,14 +60,21 @@ public class Bishop extends Piece
 			int x = 1;
 			while (r1 + x - r2 > 0)
 			{
-				if (board[r1-x][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
+
+				if (r1 + x < 8 && c1 + x < 8)
 				{
-					throw new InvalidMoveException("Piece in the way");
-				}
-				if (board[r1-x][c1+x] != null)
-				{
-					throw new InvalidMoveException("Piece in the way");
-				}
+					if (board[r1+x][c1+x] != null)
+					{
+						throw new InvalidMoveException("Piece in the way");
+					}
+					if (board[r1+x][c1+x] != null)
+					{
+						if (board[r1+x][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
+						{
+							throw new InvalidMoveException("Piece in the way");
+						}
+					}
+									}
 				x++;
 			}
 
@@ -86,8 +93,6 @@ public class Bishop extends Piece
 		//Check for when it moves up and left
 		if (r1 - r2 > 0 && c1 - c2 > 0)
 		{
-			
-			System.out.println("in first if");
 			int x = 1;
 			while (r1+x-r2 < 0)
 			{
@@ -117,12 +122,22 @@ public class Bishop extends Piece
 		if (r1-r2 < 0 && c1 - c2 > 0)
 		{
 			int x = 1;
-			while (r1-x-r2 <= 0)
+			while (r1-x-r2 < 0)
 			{
-				if (board[r1+x][c1-x] != null && board[r1+x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
+
+				if (r1 - x >= 0)
 				{
-					throw new InvalidMoveException("Piece in the way");
+					if (board[r1-x][c1-x] != null)
+					{
+						throw new InvalidMoveException("Piece in the way");
+					}
+
+					if (board[r1-x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
+					{
+						throw new InvalidMoveException("Piece in the way");
+					}
 				}
+
 				x++;
 			}
 
@@ -143,11 +158,11 @@ public class Bishop extends Piece
 			int x = 1;
 			while (r1+x-r2 > 0)
 			{
-				if (board[r1+x][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
+				if (board[r1+x][c1+x] != null)
 				{
 					throw new InvalidMoveException("Piece in the way");
 				}
-				if (board[r1+x][c1+x] != null)
+				if (board[r1+x][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
 				{
 					throw new InvalidMoveException("Piece in the way");
 				}
