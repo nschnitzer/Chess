@@ -49,7 +49,7 @@ public class Driver {
 				if (counter % 2 == 1)
 				{
 					System.out.println(" -------=== It is currently Team 1's Turn! ===------- ");
-					System.out.println("Enter the coordinates to the piece you would like to move and the coordinates you would like to move them to: (Format: row1 column1 row2 column2 ");
+					System.out.println("Enter the coordinates to the piece you would like to move and the coordinates you would like to move them to: (Format: row1 column1 row2 column2) ");
 					counter++;
 
 				} //end if
