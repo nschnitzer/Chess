@@ -55,13 +55,19 @@ public class Queen extends Piece
 				int x = 1;
 				while (r1 + x - r2 > 0)
 				{
-					if (board[r1-x][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
+					if (r1 + x < 8 && c1 - x > 0)
 					{
-						throw new InvalidMoveException("Piece in the way");
-					}
-					if (board[r1-x][c1+x] != null)
-					{
-						throw new InvalidMoveException("Piece in the way");
+						if (board[r1+x][c1-x] != null)
+						{
+							throw new InvalidMoveException("Piece in the way");
+						}
+						if (board[r1+x][c1-x] != null)
+						{
+							if (board[r1+x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
+							{
+								throw new InvalidMoveException("Piece in the way");
+							}
+						}
 					}
 					x++;
 				}
@@ -75,6 +81,7 @@ public class Queen extends Piece
 				}
 				eliminated.add(board[r2][c2]);
 				board[r2][c2] = board[r1][c1];
+				board[r1][c1] = null;
 				return;
 			}
 
@@ -84,14 +91,15 @@ public class Queen extends Piece
 				int x = 1;
 				while (r1+x-r2 < 0)
 				{
-					if (board[r1-x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
-					{
-						throw new InvalidMoveException("Piece in the way");
-					}
 					if (board[r1-x][c1-x] != null)
 					{
 						throw new InvalidMoveException("Piece in the way");
 					}
+					if (board[r1-x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
+					{
+						throw new InvalidMoveException("Piece in the way");
+					}
+					
 					x++;
 				}
 
@@ -173,14 +181,16 @@ public class Queen extends Piece
 				while (c1 + x < c2)
 				{
 					//If there are pieces blocking
-					if (board[r1][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
-					{
-						throw new InvalidMoveException("Piece in the way");
-					}
+	
 					if (board[r1][c1+x] != null)
 					{
 						throw new InvalidMoveException("Piece in the way");
 					}
+					if (board[r1][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
+					{
+						throw new InvalidMoveException("Piece in the way");
+					}
+					
 					x++;
 				}
 			}
@@ -192,14 +202,15 @@ public class Queen extends Piece
 				while (c1-x > c2)
 				{
 					//If there are pieces blocking
-					if (board[r1][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
-					{
-						throw new InvalidMoveException("Piece in the way");
-					}
 					if (board[r1][c1-x] != null)
 					{
 						throw new InvalidMoveException("Piece in the way");
 					}
+					if (board[r1][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
+					{
+						throw new InvalidMoveException("Piece in the way");
+					}
+					
 					x++;
 				}
 			}
@@ -224,14 +235,15 @@ public class Queen extends Piece
 				while (r1 - x > r2)
 				{
 					//If there are pieces blocking
-					if (board[r1-x][c1].isTeamOne() == board[r1][c1].isTeamOne())
-					{
-						throw new InvalidMoveException("Piece in the way");
-					}
 					if (board[r1-x] != null)
 					{
 						throw new InvalidMoveException("Piece in the way");
 					}
+					if (board[r1-x][c1].isTeamOne() == board[r1][c1].isTeamOne())
+					{
+						throw new InvalidMoveException("Piece in the way");
+					}
+					
 					x++;
 				}
 			}
@@ -243,14 +255,15 @@ public class Queen extends Piece
 				while (r1 + x < r2)
 				{
 					//If there are pieces in the way
-					if (board[r1+x][c1].isTeamOne() == board[r1][c1].isTeamOne())
-					{
-						throw new InvalidMoveException("Piece in the way");
-					}
 					if (board[r1+x] != null)
 					{
 						throw new InvalidMoveException("Piece in the way");
 					}
+					if (board[r1+x][c1].isTeamOne() == board[r1][c1].isTeamOne())
+					{
+						throw new InvalidMoveException("Piece in the way");
+					}
+					
 				}
 			}
 

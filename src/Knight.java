@@ -30,6 +30,7 @@ public class Knight extends Piece
 		{
 			if (board[r2][c2] == null)
 			{
+				eliminated.add(board[r2][c2]); // aDDED 
 				board[r2][c2] = board[r1][c1];
 				board[r1][c1] = null;
 			}
@@ -47,7 +48,7 @@ public class Knight extends Piece
 				{
 					throw new InvalidMoveException();
 				}
-
+				eliminated.add(board[r2][c2]);
 				board[r2][c2] = board[r1][c1];
 				board[r1][c1] = null;
 			}

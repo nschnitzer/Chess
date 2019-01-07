@@ -53,31 +53,30 @@ public class Bishop extends Piece
 			}
 		}
 
+		// UP AND RIGHT
 		//Check for pieces in between
-		//Check for when it moves up and right
+		
 		if (r1 - r2 > 0 && c1 - c2 < 0)
 		{
 			int x = 1;
 			while (r1 + x - r2 > 0)
 			{
-
-				if (r1 + x < 8 && c1 + x < 8)
+				if (r1 + x < 8 && c1 - x > 0)
 				{
-					if (board[r1+x][c1+x] != null)
+					if (board[r1+x][c1-x] != null)
 					{
 						throw new InvalidMoveException("Piece in the way");
 					}
-					if (board[r1+x][c1+x] != null)
+					if (board[r1+x][c1-x] != null)
 					{
-						if (board[r1+x][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
+						if (board[r1+x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
 						{
 							throw new InvalidMoveException("Piece in the way");
 						}
 					}
-									}
+				}
 				x++;
 			}
-
 
 			//Passed all exception catching
 			//Check if king
@@ -87,6 +86,7 @@ public class Bishop extends Piece
 			}
 			eliminated.add(board[r2][c2]);
 			board[r2][c2] = board[r1][c1];
+			board[r1][c1] = null;
 			return;
 		}
 
