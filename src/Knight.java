@@ -19,30 +19,11 @@ public class Knight extends Piece
 	{
 		if (board[r2][c2] != null)
 		{
-			System.out.println("if");
 			if (board[r1][c1].isTeamOne() == board[r2][c2].isTeamOne())//if the new piece location is the same team as the current piece
 			{
-				System.out.println("inside if");
 				throw new InvalidMoveException();
 			}
-<<<<<<< HEAD
-
-		}
-		
-		else if ((Math.abs(c1-c2) == 2 && Math.abs(r1-r2) == 1) || (Math.abs(c1-c2) == 1 && Math.abs(r1-r2) == 2))
-		{
-			System.out.println("else if 1");
-			if (board[r2][c2] == null)
-			{
-				System.out.println("else if");
-				eliminated.add(board[r2][c2]); // aDDED 
-				board[r2][c2] = board[r1][c1];
-				board[r1][c1] = null;
-			}
-			else //must be enemy piece
-=======
 			else if ((Math.abs(c1-c2) == 2 && Math.abs(r1-r2) == 1) || (Math.abs(c1-c2) == 1 && Math.abs(r1-r2) == 2))
->>>>>>> 2198cdad8517d3858fa713196a215b2e0c24ea36
 			{
 				//must be enemy piece
 
@@ -58,7 +39,7 @@ public class Knight extends Piece
 				{
 					throw new InvalidMoveException();
 				}
-				eliminated.add(board[r2][c2]);
+
 				board[r2][c2] = board[r1][c1];
 				board[r1][c1] = null;
 			}

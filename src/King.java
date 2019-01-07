@@ -32,6 +32,7 @@ public class King extends Piece
 		
 			if (board[x2][y2] == null)
 			{
+				
 				board[x2][y2] = board[x1][y1];
 				board[x1][y1] = null;
 			}
