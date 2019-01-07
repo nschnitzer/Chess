@@ -23,18 +23,10 @@ public class Knight extends Piece
 			{
 				throw new InvalidMoveException();
 			}
+			else if ((Math.abs(c1-c2) == 2 && Math.abs(r1-r2) == 1) || (Math.abs(c1-c2) == 1 && Math.abs(r1-r2) == 2))
+			{
+				//must be enemy piece
 
-		}
-		
-		else if ((Math.abs(c1-c2) == 2 && Math.abs(r1-r2) == 1) || (Math.abs(c1-c2) == 1 && Math.abs(r1-r2) == 2))
-		{
-			if (board[r2][c2] == null)
-			{
-				board[r2][c2] = board[r1][c1];
-				board[r1][c1] = null;
-			}
-			else //must be enemy piece
-			{
 				if (board[r1][c1].isTeamOne() && board[r2][c2].isTeamOne() == false)//if team 1 captures team 2
 				{
 					eliminated.add(board[r2][c2]);
@@ -51,12 +43,18 @@ public class Knight extends Piece
 				board[r2][c2] = board[r1][c1];
 				board[r1][c1] = null;
 			}
+			else
+			{
+				throw new InvalidMoveException();
+			}
 		}
 		else
 		{
-			throw new InvalidMoveException();
+			
+				board[r2][c2] = board[r1][c1];
+				board[r1][c1] = null;
 		}
-		
+
 	}
 
 	public String getName()
