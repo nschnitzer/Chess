@@ -61,12 +61,23 @@ public class Bishop extends Piece
 			int x = 1;
 			while (r1 + x - r2 > 0)
 			{
+<<<<<<< HEAD
 				if (r1 + x < 8 && c1 - x > 0)
 				{
 					if (board[r1+x][c1-x] != null)
 					{
 						throw new InvalidMoveException("Piece in the way");
 					}
+=======
+
+				if (r1 + x < 8 && c1 - x >= 0)
+				{
+					/*if (board[r1+x][c1-x] != null)
+					{
+						throw new InvalidMoveException("Piece in the way");
+					}
+					 */
+>>>>>>> 6e1ff763156a466835f2ee205538286eae582af1
 					if (board[r1+x][c1-x] != null)
 					{
 						if (board[r1+x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())

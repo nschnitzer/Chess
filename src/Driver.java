@@ -20,6 +20,7 @@ public class Driver {
 		//	Scanner scan = new Scanner(System.in);
 		String continueGame = "y";
 		Scanner scan = new Scanner(System.in);
+		//Scanner scan = new Scanner(new File("src/inputs.txt"));
 		StringTokenizer tokenizer;
 		Board board = new Board();
 
@@ -153,13 +154,13 @@ public class Driver {
 				}
 				catch (CheckmateException e)
 				{
-					System.out.println("You are in checkmate! Go again!");
-					counter--;
-					continue;
+					System.out.println("You are checkmated");
+					break;
 				} 
 				catch (InvalidMoveException e)
 				{
 					System.out.println("ERROR: Invalid Move!");
+					e.printStackTrace();
 					counter--;
 					continue;
 				}
