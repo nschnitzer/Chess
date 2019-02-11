@@ -32,14 +32,9 @@ public class Queen extends Piece
 		//Literally same code as Bishop
 		//Checks for diagonal movement
 
+		int x;
 		if (board[r2][c2] != null)
 		{
-			//Check that the piece is moving diagonally
-			//Ensure it moves diagonally
-			if (Math.abs(r1-r2) != Math.abs(c1-c2))
-			{
-				throw new InvalidMoveException("Must Move Diagonally");
-			}
 			if (board[r1][c1].isTeamOne() == board[r2][c2].isTeamOne())
 			{
 				throw new InvalidMoveException();
@@ -52,7 +47,13 @@ public class Queen extends Piece
 			//Check for when it moves up and right
 			if (r1 - r2 > 0 && c1 - c2 < 0)
 			{
-				int x = 1;
+				//Check that the piece is moving diagonally
+				//Ensure it moves diagonally
+				if (Math.abs(r1-r2) != Math.abs(c1-c2))
+				{
+					throw new InvalidMoveException("Must Move Diagonally");
+				} 
+				 x = 1;
 				while (r1 + x - r2 > 0)
 				{
 					if (r1 + x < 8 && c1 - x > 0)
@@ -88,7 +89,13 @@ public class Queen extends Piece
 			//Check for when it moves up and left
 			if (r1 - r2 > 0 && c1 - c2 > 0)
 			{
-				int x = 1;
+				//Check that the piece is moving diagonally
+				//Ensure it moves diagonally
+				if (Math.abs(r1-r2) != Math.abs(c1-c2))
+				{
+					throw new InvalidMoveException("Must Move Diagonally");
+				}
+				x = 1;
 				while (r1+x-r2 < 0)
 				{
 					if (board[r1-x][c1-x] != null)
@@ -117,7 +124,13 @@ public class Queen extends Piece
 			//Check for when it moves down and left
 			if (r1-r2 < 0 && c1 - c2 > 0)
 			{
-				int x = 1;
+				//Check that the piece is moving diagonally
+				//Ensure it moves diagonally
+				if (Math.abs(r1-r2) != Math.abs(c1-c2))
+				{
+					throw new InvalidMoveException("Must Move Diagonally");
+				}
+				 x = 1;
 				while (r1-x-r2 < 0)
 				{
 					if (board[r1+x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
@@ -145,22 +158,23 @@ public class Queen extends Piece
 			//Check for when it moves down and right
 			if (r1-r2 < 0 && c1-c2 < 0)
 			{
-				int x = 1;
+				//Check that the piece is moving diagonally
+				//Ensure it moves diagonally
+				if (Math.abs(r1-r2) != Math.abs(c1-c2))
+				{
+					throw new InvalidMoveException("Must Move Diagonally");
+				}
+				x = 1;
 				while (r1+x-r2 > 0)
 				{
-					if (board[r1+x][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
-					{
-						throw new InvalidMoveException("Piece in the way");
-					}
 					if (board[r1+x][c1+x] != null)
 					{
 						throw new InvalidMoveException("Piece in the way");
 					}
 					x++;
 				}
-
 				//Passed all invalid move exception catching
-				if (board[r2][c2].isKing())
+				if (board[r2][c2] != null && board[r2][c2].isKing())
 				{
 					throw new CheckmateException();
 				}
@@ -177,16 +191,12 @@ public class Queen extends Piece
 			//If moving left
 			if (c1 - c2 < 0)
 			{
-				int x = 1;
+				x = 1;
 				while (c1 + x < c2)
 				{
 					//If there are pieces blocking
 	
 					if (board[r1][c1+x] != null)
-					{
-						throw new InvalidMoveException("Piece in the way");
-					}
-					if (board[r1][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
 					{
 						throw new InvalidMoveException("Piece in the way");
 					}
@@ -198,7 +208,7 @@ public class Queen extends Piece
 			//If moving right
 			if (c1 - c2 > 0)
 			{
-				int x = 1;
+				x = 1;
 				while (c1-x > c2)
 				{
 					//If there are pieces blocking
@@ -206,11 +216,6 @@ public class Queen extends Piece
 					{
 						throw new InvalidMoveException("Piece in the way");
 					}
-					if (board[r1][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
-					{
-						throw new InvalidMoveException("Piece in the way");
-					}
-					
 					x++;
 				}
 			}
@@ -231,15 +236,11 @@ public class Queen extends Piece
 			//If moving up
 			if (r1 - r2 > 0)
 			{
-				int x = 1;
+				 x = 1;
 				while (r1 - x > r2)
 				{
 					//If there are pieces blocking
 					if (board[r1-x] != null)
-					{
-						throw new InvalidMoveException("Piece in the way");
-					}
-					if (board[r1-x][c1].isTeamOne() == board[r1][c1].isTeamOne())
 					{
 						throw new InvalidMoveException("Piece in the way");
 					}
@@ -251,7 +252,7 @@ public class Queen extends Piece
 			//If moving down
 			if (r1 - r2 < 0)
 			{
-				int x = 1;
+				x = 1;
 				while (r1 + x < r2)
 				{
 					//If there are pieces in the way
