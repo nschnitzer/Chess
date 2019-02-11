@@ -39,26 +39,26 @@ public class Bishop extends Piece
 
 	public void move(int r1, int c1, int r2, int c2, Piece[][] board, ArrayList<Piece> eliminated) throws InvalidMoveException, CheckmateException
 	{
-		if (board[r2][c2] != null)
-		{
+		System.out.println("CHECKER2");
 			//Check that the piece is moving diagonally
 			//Ensure it moves diagonally
 			if (Math.abs(r1-r2) != Math.abs(c1-c2))
 			{
 				throw new InvalidMoveException("Must Move Diagonally");
 			}
+			if (board[r2][c2] != null)
 			if (board[r1][c1].isTeamOne() == board[r2][c2].isTeamOne())
 			{
 				throw new InvalidMoveException();
 			}
-		}
 
 		// UP AND RIGHT
 		//Check for pieces in between
-
+		int x;
+		System.out.println("CHECKER3");
 		if (r1 - r2 > 0 && c1 - c2 < 0)
 		{
-			int x = 1;
+			x = 1;
 			while (r1 + x - r2 > 0)
 			{
 
@@ -93,12 +93,15 @@ public class Bishop extends Piece
 				board[r1][c1] = null;
 				return;
 			}
+		}
 
 			// UP + LEFT
+		if (r1-r2 <  0 && c1-c2 > 0)
+		{
 			x = 1;
 			while (r1 + x - r2 > 0)
 			{
-				
+				System.out.println("CHECKER4");
 				if (r1 - x >= 0 && c1 - x >= 0) // if (r1 - r2 > 0 && c1 - c2 > 0)
 				{
 					if (board[r1-x][c1-x] != null)
@@ -118,6 +121,7 @@ public class Bishop extends Piece
 
 					x++;
 				}
+				System.out.println("CHECKER");
 
 				//Passed all exception catching
 				if (board[r2][c2] != null && board[r2][c2].isKing())
@@ -139,11 +143,11 @@ public class Bishop extends Piece
 
 					if (r1 - x >= 0 && c1 - x >= 0)
 					{
-						if (board[r1-x][c1-x] != null)
+						if (board[r1-x][c1+x] != null)
 						{
 							throw new InvalidMoveException("Piece in the way");
 						}
-						if (board[r1-x][c1-x] != null)
+						if (board[r1-x][c1+x] != null)
 						{
 							if (board[r1-x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
 							{

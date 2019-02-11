@@ -186,6 +186,8 @@ public class Driver {
 			}
 
 			board.printBoard();
+			System.out.println(board.p1Eliminated);
+			System.out.println(board.p2Eliminated);
 			//counter++;
 			lcv = true;
 		} // end while loop

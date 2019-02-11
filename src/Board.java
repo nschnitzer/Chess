@@ -13,8 +13,8 @@ public class Board
 	private Piece[][] board = new Piece[8][8];
 	private final int SIZE = 7;
 	public int counter = 0;
-	ArrayList<Piece> p1Eliminated = new ArrayList<Piece>();
-	ArrayList<Piece> p2Eliminated = new ArrayList<Piece>();
+	public ArrayList<Piece> p1Eliminated = new ArrayList<Piece>();
+	public ArrayList<Piece> p2Eliminated = new ArrayList<Piece>();
 
 	//Constructor - Initialize the board
 	//Similar to Checkers Initialization
