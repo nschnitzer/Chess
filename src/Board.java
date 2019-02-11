@@ -145,12 +145,13 @@ public class Board
 			p1 = findPiece(x1,y1);
 			p2 = findPiece(x2,y2);
 			//System.out.println(p1);
-
 		}
 		catch(InvalidMoveException e)
 		{
 			throw new InvalidMoveException(e.getMessage());
 		}
+		
+
 
 		//System.out.println(p1);
 		if (p1 == null)

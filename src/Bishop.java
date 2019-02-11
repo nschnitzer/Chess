@@ -55,141 +55,146 @@ public class Bishop extends Piece
 
 		// UP AND RIGHT
 		//Check for pieces in between
-		
+
 		if (r1 - r2 > 0 && c1 - c2 < 0)
 		{
 			int x = 1;
 			while (r1 + x - r2 > 0)
 			{
-<<<<<<< HEAD
-				if (r1 + x < 8 && c1 - x > 0)
-				{
-					if (board[r1+x][c1-x] != null)
-					{
-						throw new InvalidMoveException("Piece in the way");
-					}
-=======
 
 				if (r1 + x < 8 && c1 - x >= 0)
 				{
-					/*if (board[r1+x][c1-x] != null)
+					if (board[r1+x][c1-x] != null)
 					{
 						throw new InvalidMoveException("Piece in the way");
 					}
-					 */
->>>>>>> 6e1ff763156a466835f2ee205538286eae582af1
-					if (board[r1+x][c1-x] != null)
+					if (r1 + x < 8 && c1 - x >= 0)
 					{
-						if (board[r1+x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
+
+						if (board[r1+x][c1-x] != null)
 						{
-							throw new InvalidMoveException("Piece in the way");
+							if (board[r1+x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
+							{
+								throw new InvalidMoveException("Piece in the way");
+							}
 						}
 					}
+					x++;
 				}
-				x++;
-			}
 
-			//Passed all exception catching
-			//Check if king
-			if (board[r2][c2] != null && board[r2][c2].isKing())
-			{
-				throw new CheckmateException();
-			}
-			eliminated.add(board[r2][c2]);
-			board[r2][c2] = board[r1][c1];
-			board[r1][c1] = null;
-			return;
-		}
-
-		//Check for when it moves up and left
-		if (r1 - r2 > 0 && c1 - c2 > 0)
-		{
-			int x = 1;
-			while (r1+x-r2 < 0)
-			{
-				if (board[r1-x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
+				//Passed all exception catching
+				//Check if king
+				if (board[r2][c2] != null && board[r2][c2].isKing())
 				{
-					throw new InvalidMoveException("Piece in the way");
+					throw new CheckmateException();
 				}
-				if (board[r1-x][c1-x] != null)
-				{
-					throw new InvalidMoveException("Piece in the way");
-				}
-				x++;
+				eliminated.add(board[r2][c2]);
+				board[r2][c2] = board[r1][c1];
+				board[r1][c1] = null;
+				return;
 			}
 
-			//Passed all exception catching
-			if (board[r2][c2] != null && board[r2][c2].isKing())
+			// UP + LEFT
+			x = 1;
+			while (r1 + x - r2 > 0)
 			{
-				throw new CheckmateException();
-			}
-			eliminated.add(board[r2][c2]);
-			board[r2][c2] = board[r1][c1];
-			board[r1][c1] = null;
-			return;
-		}
-
-		//Check for when it moves down and left
-		if (r1-r2 < 0 && c1 - c2 > 0)
-		{
-			int x = 1;
-			while (r1-x-r2 < 0)
-			{
-
-				if (r1 - x >= 0)
+				
+				if (r1 - x >= 0 && c1 - x >= 0) // if (r1 - r2 > 0 && c1 - c2 > 0)
 				{
 					if (board[r1-x][c1-x] != null)
 					{
 						throw new InvalidMoveException("Piece in the way");
 					}
+					if (r1 - x < 8 && c1 - x >= 0)
+					{
+						if (board[r1-x][c1-x] != null)
+						{
+							if (board[r1-x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
+							{
+								throw new InvalidMoveException("Piece in the way");
+							}
+						}
+					}
 
-					if (board[r1-x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
+					x++;
+				}
+
+				//Passed all exception catching
+				if (board[r2][c2] != null && board[r2][c2].isKing())
+				{
+					throw new CheckmateException();
+				}
+				eliminated.add(board[r2][c2]);
+				board[r2][c2] = board[r1][c1];
+				board[r1][c1] = null;
+				return;
+			}
+
+			// DOWN + LEFT
+			if (r1-r2 < 0 && c1 - c2 > 0)
+			{
+				x = 1;
+				while (r1-x-r2 < 0)
+				{
+
+					if (r1 - x >= 0 && c1 - x >= 0)
+					{
+						if (board[r1-x][c1-x] != null)
+						{
+							throw new InvalidMoveException("Piece in the way");
+						}
+						if (board[r1-x][c1-x] != null)
+						{
+							if (board[r1-x][c1-x].isTeamOne() == board[r1][c1].isTeamOne())
+							{
+								throw new InvalidMoveException("Piece in the way");
+							}
+						}
+
+					}
+
+					x++;
+				}
+
+				//Passed all invalid move exception catching
+				if (board[r2][c2] != null && board[r2][c2].isKing())
+				{
+					throw new CheckmateException();
+				}
+				eliminated.add(board[r2][c2]);
+				board[r2][c2] = board[r1][c1];
+				board[r1][c1] = null;
+				return;
+			}
+
+			//Check for when it moves down and right
+			if (r1-r2 < 0 && c1-c2 < 0)
+			{
+				x = 1;
+				while (r1+x-r2 > 0)
+				{
+					if (board[r1+x][c1+x] != null)
 					{
 						throw new InvalidMoveException("Piece in the way");
 					}
+					if (board[r1+x][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
+					{
+						throw new InvalidMoveException("Piece in the way");
+					}
+					x++;
 				}
-
-				x++;
-			}
-
-			//Passed all invalid move exception catching
-			if (board[r2][c2] != null && board[r2][c2].isKing())
-			{
-				throw new CheckmateException();
-			}
-			eliminated.add(board[r2][c2]);
-			board[r2][c2] = board[r1][c1];
-			board[r1][c1] = null;
-			return;
-		}
-
-		//Check for when it moves down and right
-		if (r1-r2 < 0 && c1-c2 < 0)
-		{
-			int x = 1;
-			while (r1+x-r2 > 0)
-			{
-				if (board[r1+x][c1+x] != null)
+				//Passed all invalid move exception catching
+				if (board[r2][c2] != null && board[r2][c2].isKing())
 				{
-					throw new InvalidMoveException("Piece in the way");
+					throw new CheckmateException();
 				}
-				if (board[r1+x][c1+x].isTeamOne() == board[r1][c1].isTeamOne())
-				{
-					throw new InvalidMoveException("Piece in the way");
-				}
-				x++;
+				eliminated.add(board[r2][c2]);
+				board[r2][c2] = board[r1][c1];
+				board[r1][c1] = null;
+				return;
 			}
-			//Passed all invalid move exception catching
-			if (board[r2][c2] != null && board[r2][c2].isKing())
-			{
-				throw new CheckmateException();
-			}
-			eliminated.add(board[r2][c2]);
-			board[r2][c2] = board[r1][c1];
-			board[r1][c1] = null;
-			return;
-		}
 
+		}
 	}
 
 

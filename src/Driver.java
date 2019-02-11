@@ -14,7 +14,9 @@ public class Driver {
 
 	public static void main(String[] args) throws IOException, CheckmateException, WrongTeamException, InvalidMoveException, RetreivePieceException, NoSuchElementException
 	{
-
+		// Check bishop movement
+		// Check knight movement
+		// Check queen movement
 		// TO DO LIST:
 		// - FIX KNIGHT EATING + MOVING KNIGHT ON PLAYER 2 TURN
 		//	Scanner scan = new Scanner(System.in);
@@ -61,13 +63,13 @@ public class Driver {
 				}
 				tokenizer = new StringTokenizer(scan.nextLine());
 				
-				//Exceptions
 				try 
 				{
 
 					p1 = Integer.parseInt(tokenizer.nextToken());
 
 					String play2 = tokenizer.nextToken();
+					
 					if (play2.equalsIgnoreCase("A"))
 					{
 						p2 = 0;
@@ -100,11 +102,17 @@ public class Driver {
 					{
 						p2 = 7;
 					}
+					else
+					{
+						throw new NoSuchElementException();
+					}
 
 					p3 = Integer.parseInt(tokenizer.nextToken());
 
 					String play4 = tokenizer.nextToken();
 
+					if (Character.isAlphabetic(play4.charAt(0)))
+					{
 					if (play4.equalsIgnoreCase("A"))
 					{
 						p4 = 0;
@@ -137,7 +145,12 @@ public class Driver {
 					{
 						p4 = 7;
 					}
-
+					else
+					{
+						throw new InvalidMoveException();
+					}
+					}
+					
 					if (counter % 2 == 1)
 					{
 						board.prepMove(p1-1, p2, p3-1, p4, false);
@@ -170,13 +183,6 @@ public class Driver {
 					counter--;
 					continue;
 				}
-				catch (NoSuchElementException e)
-				{
-					System.out.println("ERROR: Invalid input!");
-					counter--;
-					continue;
-				}
-
 			}
 
 			board.printBoard();
