@@ -14,16 +14,12 @@ public class Driver {
 
 	public static void main(String[] args) throws IOException, CheckmateException, WrongTeamException, InvalidMoveException, RetreivePieceException, NoSuchElementException
 	{
-		// Check bishop movement
-		// Check knight movement
-		// Check queen movement
-		// TO DO LIST:
-		// - FIX KNIGHT EATING + MOVING KNIGHT ON PLAYER 2 TURN
-		//	Scanner scan = new Scanner(System.in);
+		
 		String continueGame = "y";
-		Scanner scan = new Scanner(System.in);
-		//Scanner scan = new Scanner(new File("src/inputs.txt"));
+		//Scanner scan = new Scanner(System.in);
+		Scanner scan = new Scanner(new File("src/inputs.txt"));
 		StringTokenizer tokenizer;
+		StringTokenizer tokenizer2;
 		Board board = new Board();
 
 		System.out.println("==================== Welcome to Chess! ====================");
@@ -66,9 +62,11 @@ public class Driver {
 				try 
 				{
 
-					p1 = Integer.parseInt(tokenizer.nextToken());
+					tokenizer2 = new StringTokenizer(tokenizer.nextToken());
+					String token = tokenizer2.nextToken();
+					p1 = Integer.parseInt(token.substring(1));
 
-					String play2 = tokenizer.nextToken();
+					String play2 = token.substring(0,1);
 					
 					if (play2.equalsIgnoreCase("A"))
 					{
@@ -107,9 +105,11 @@ public class Driver {
 						throw new NoSuchElementException();
 					}
 
-					p3 = Integer.parseInt(tokenizer.nextToken());
+					tokenizer2 = new StringTokenizer(tokenizer.nextToken());
+					token = tokenizer2.nextToken();
+					p3 = Integer.parseInt(token.substring(1));
 
-					String play4 = tokenizer.nextToken();
+					String play4 = token.substring(0,1);
 
 					if (Character.isAlphabetic(play4.charAt(0)))
 					{
@@ -186,8 +186,8 @@ public class Driver {
 			}
 
 			board.printBoard();
-			System.out.println(board.p1Eliminated);
-			System.out.println(board.p2Eliminated);
+			//System.out.println(board.p1Eliminated);
+			//System.out.println(board.p2Eliminated);
 			//counter++;
 			lcv = true;
 		} // end while loop

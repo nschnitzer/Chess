@@ -41,7 +41,6 @@ public class Pawn extends Piece
 	{
 		if (firstMove == true)
 		{
-			System.out.println("Test2");
 			if (c1 != c2)
 			{
 				throw new InvalidMoveException();
